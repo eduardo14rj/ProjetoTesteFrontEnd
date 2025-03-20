@@ -1,8 +1,8 @@
-﻿using Backend.Context.Constant;
-using Backend.Context.Entities;
+﻿using Backend.Domain.Entities;
+using Backend.Infra.Constant;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Context
+namespace Backend.Infra
 {
     public class AppDbContext : DbContext
     {

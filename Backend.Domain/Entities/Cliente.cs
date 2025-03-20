@@ -1,4 +1,4 @@
-﻿namespace Backend.Context.Entities
+﻿namespace Backend.Domain.Entities
 {
     public class Cliente : Entity
     {

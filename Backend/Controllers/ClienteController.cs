@@ -1,4 +1,5 @@
-﻿using Backend.Context;
+﻿using Backend.Infra;
+using Backend.Infra.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,16 +8,16 @@ namespace Backend.Controllers
 
     public class ClienteController : BackendController
     {
-        public AppDbContext context { get; set; }
-        public ClienteController(AppDbContext context)
+        ProdutoRepository repository;
+        public ClienteController(AppDbContext context, ProdutoRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
 
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var clientes = await context.Clientes.ToListAsync();
+            var clientes = await repository.GetAllAsync();
             return Ok(clientes);
         }
     }

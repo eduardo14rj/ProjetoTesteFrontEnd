@@ -1,4 +1,5 @@
-using Backend.Context;
+using Backend.Infra;
+using Backend.Infra.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("BancoEmMemoria"));
+
+builder.Services.ScopeRepositories();
 
 var app = builder.Build();
 

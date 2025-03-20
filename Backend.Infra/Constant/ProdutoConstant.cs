@@ -1,7 +1,6 @@
-﻿
-using Backend.Context.Entities;
+﻿using Backend.Domain.Entities;
 
-namespace Backend.Context.Constant
+namespace Backend.Infra.Constant
 {
     public static class ProdutoConstant
     {
