@@ -10,5 +10,6 @@ namespace Backend.Domain.Entities
         public int Id { get; set; }
 
         public DateTime CriadoEm { get; set; } = DateTime.Now;
+        public DateTime? DeletadoEm { get; set; }
     }
 }

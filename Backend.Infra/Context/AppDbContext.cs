@@ -2,7 +2,7 @@
 using Backend.Infra.Constant;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Infra
+namespace Backend.Infra.Context
 {
     public class AppDbContext : DbContext
     {

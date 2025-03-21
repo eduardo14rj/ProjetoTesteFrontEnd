@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Backend.Infra.Repositories.Repository
+namespace Backend.Domain
 {
-    public class PagedResult<T>
+    public class PageResult<T>
     {
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }

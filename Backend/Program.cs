@@ -1,7 +1,7 @@
+using Backend.Application;
 using Backend.Infra;
-using Backend.Infra.Repositories;
+using Backend.Infra.Context;
 using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("BancoEmMemoria"));
 
 builder.Services.ScopeRepositories();
+builder.Services.ScopeServices();
 
 var app = builder.Build();
 
