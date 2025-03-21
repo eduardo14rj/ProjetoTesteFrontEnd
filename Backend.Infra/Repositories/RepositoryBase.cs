@@ -46,19 +46,28 @@ namespace Backend.Infra.Repositories
         {
             var total = _context.Set<T>().Where(x => x.DeletadoEm == null).Count();
 
+            var offset = pageOffset == 0 ? 1 : pageOffset;
+
             var result = new PageResult<T>
             {
-                CurrentPage = pageOffset,
+                CurrentPage = offset,
                 PageSize = pageSize,
                 TotalRecords = total,
+                IsNextPage = (offset * pageSize) < total,
                 Results = await _context.Set<T>()
            .Where(x => x.DeletadoEm == null)
-           .Skip((pageOffset - 1) * pageSize)
+           .Skip((offset - 1) * pageSize)
            .Take(pageSize)
            .ToListAsync()
             };
 
             return result;
+        }
+
+        public async Task<IEnumerable<T>> ReadAsync()
+        {
+            var items = await _context.Set<T>().ToListAsync();
+            return items;
         }
 
         public Task UpdateAsync(T entity)

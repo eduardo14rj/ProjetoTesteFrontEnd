@@ -11,6 +11,7 @@ namespace Backend.Domain
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
         public int TotalRecords { get; set; }
+        public bool IsNextPage { get; set; }
         public IEnumerable<T> Results { get; set; } = default!;
     }
 }

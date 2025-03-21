@@ -18,8 +18,4 @@
     <ProjectReference Include="..\Backend.Domain\Backend.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Pagination\" />
-  </ItemGroup>
-
 </Project>

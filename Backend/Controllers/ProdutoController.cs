@@ -15,17 +15,31 @@ namespace Backend.Controllers
             ProdutoService = produtoService;
         }
 
-        [HttpGet]
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create(CreateProductDTO_Req data)
+        {
+            await ProdutoService.CreateAsync(data);
+            return Ok();
+        }
+
+        [HttpGet("Read")]
         public async Task<IActionResult> List([FromQuery] int pageOffset)
         {
             var produtos = await ProdutoService.ListAsync(pageOffset);
             return Ok(produtos);
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create(CreateProductDTO_Req data)
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update(UpdateProductDTO_Req data)
         {
-            await ProdutoService.CreateUpdateAsync(data);
+            await ProdutoService.UpdateAsync(data);
+            return Ok();
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Remove(RemoveProductDTO_Req data)
+        {
+            await ProdutoService.RemoveAsync(data.Id);
             return Ok();
         }
     }

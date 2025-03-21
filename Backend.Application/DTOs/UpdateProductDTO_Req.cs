@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Backend.Application.DTOs
 {
-    public class CreateProductDTO_Req
+    public class UpdateProductDTO_Req
     {
+        public int Id { get; set; }
         public string Name { get; set; } = default!;
         public decimal Price { get; set; }
     }
