@@ -1,6 +1,6 @@
-import { ListTemplateComponent } from '@/template/list-template/list-template.component';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ListTemplateComponent } from '../../template/list-template/list-template.component';
 
 @Component({
   selector: 'app-clientes',
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ClientesComponent implements OnInit {
   @ViewChild(ListTemplateComponent) listTemplate!: ListTemplateComponent;
 
-  constructor(private route: ActivatedRoute, listTemplate: ListTemplateComponent) { }
+  constructor(private route: ActivatedRoute) { }
 
 
   ngOnInit() {
