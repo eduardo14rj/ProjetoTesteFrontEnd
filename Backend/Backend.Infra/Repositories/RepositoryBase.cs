@@ -42,11 +42,18 @@ namespace Backend.Infra.Repositories
             return item;
         }
 
-        public async Task<PageResult<T>> ListPagedAsync(int pageOffset, int pageSize)
+        public async Task<PageResult<T>> ListPagedAsync(int pageOffset, int pageSize, string search)
         {
             var total = _context.Set<T>().Where(x => x.DeletadoEm == null).Count();
 
             var offset = pageOffset == 0 ? 1 : pageOffset;
+
+            var query = _context.Set<T>().Where(x => x.DeletadoEm == null);
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = ApplySearchFilter(query, search);
+            }
 
             var result = new PageResult<T>
             {
@@ -54,11 +61,10 @@ namespace Backend.Infra.Repositories
                 PageSize = pageSize,
                 TotalRecords = total,
                 IsNextPage = (offset * pageSize) < total,
-                Results = await _context.Set<T>()
-           .Where(x => x.DeletadoEm == null)
-           .Skip((offset - 1) * pageSize)
-           .Take(pageSize)
-           .ToListAsync()
+                Results = await query
+                    .Skip((offset - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync()
             };
 
             return result;
@@ -74,5 +80,7 @@ namespace Backend.Infra.Repositories
         {
             throw new NotImplementedException();
         }
+
+        protected abstract IQueryable<T> ApplySearchFilter(IQueryable<T> query, string search);
     }
 }

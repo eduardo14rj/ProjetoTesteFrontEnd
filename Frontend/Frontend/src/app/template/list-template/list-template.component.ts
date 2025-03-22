@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,12 +11,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ListTemplateComponent implements OnInit {
   @Input() pageTitle: string = 'Título';
   @Input() searchPlaceholder: string = "";
+  @Input() searchValue: string = "";
+  @Output() SearchEmitter: EventEmitter<string> = new EventEmitter<string>();
   public selectOption: string = "Clientes";
+
 
   constructor(private route: ActivatedRoute, private router: Router, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
+    const childRoute = this.route.firstChild;
+    if (childRoute && childRoute.snapshot.data['pageTitle']) {
+      this.pageTitle = childRoute.snapshot.data['pageTitle'];
+      this.selectOption = childRoute.snapshot.data['pageTitle'];
+    }
 
+    
   }
 
   changeTitle(newTitle: string) {
@@ -26,7 +35,17 @@ export class ListTemplateComponent implements OnInit {
 
   changePlaceholderSearch(placeholder: string) {
     this.searchPlaceholder = placeholder;
+    this.searchValue = "";
     this.cd.detectChanges();
+  }
+
+  changeSearchValue(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchValue = value;
+  }
+
+  search() {
+    this.SearchEmitter.emit(this.searchValue);
   }
 
 }

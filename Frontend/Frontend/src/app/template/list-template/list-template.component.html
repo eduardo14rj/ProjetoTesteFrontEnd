@@ -3,14 +3,9 @@
         <div class="menu-line menu-height">
             <div class="container align-center justify-between ">
                 <div class="flex align-center wrapper-height justify-end gap">
-                    <!-- <button mat-icon-button value="select">
-                        <mat-icon>person</mat-icon>
-                    </button>
-                    <button mat-icon-button>
-                        <mat-icon>inbox</mat-icon>
-                    </button> -->
 
-                    <mat-button-toggle-group hideSingleSelectionIndicator #group="matButtonToggleGroup" [(value)]="selectOption">
+                    <mat-button-toggle-group hideSingleSelectionIndicator #group="matButtonToggleGroup"
+                        [(value)]="selectOption">
                         <mat-button-toggle value="Clientes" [routerLink]="['/clientes']">
                             <mat-icon>person</mat-icon>
                         </mat-button-toggle>
@@ -26,8 +21,11 @@
                 <h3>{{pageTitle}}</h3>
                 <div>
                     <mat-form-field appearance="outline" class="hint-hide">
-                        <input matInput type="search" [placeholder]="searchPlaceholder">
-                        <mat-icon matSuffix style="font-size: 1.2em">search</mat-icon>
+                        <input matInput type="search" [value]="searchValue" (change)="changeSearchValue($event)"
+                            [placeholder]="searchPlaceholder">
+                        <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'" (click)="search()">
+                            <mat-icon>search</mat-icon>
+                        </button>
                     </mat-form-field>
                 </div>
             </div>

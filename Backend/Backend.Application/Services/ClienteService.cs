@@ -13,9 +13,9 @@ namespace Backend.Application.Services
             _clienteRepository = clienteRepository;
         }
 
-        public async Task<PageResult<Cliente>> ListAsync(int pageOffset)
+        public async Task<PageResult<Cliente>> ListAsync(int pageOffset, int pageSize, string search)
         {
-            var list = await _clienteRepository.ListPagedAsync(pageOffset, 5);
+            var list = await _clienteRepository.ListPagedAsync(pageOffset, pageSize, search);
             return list;
         }
 

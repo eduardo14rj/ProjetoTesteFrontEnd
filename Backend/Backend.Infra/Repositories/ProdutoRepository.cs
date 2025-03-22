@@ -9,5 +9,10 @@ namespace Backend.Infra.Repositories
         public ProdutoRepository(AppDbContext context) : base(context)
         {
         }
+
+        protected override IQueryable<Produto> ApplySearchFilter(IQueryable<Produto> query, string search)
+        {
+            return query.Where(c => c.Nome.Contains(search));
+        }
     }
 }
