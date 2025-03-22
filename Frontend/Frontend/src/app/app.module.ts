@@ -7,10 +7,16 @@ import { UiModule } from './ui/ui.module';
 import { NgIconsModule } from '@ng-icons/core';
 import { SharedModule } from './shared/shared.module';
 import * as lucideIcons from '@ng-icons/lucide';
+import { ListTemplateComponent } from './template/list-template/list-template.component';
+import { ClientesComponent } from './pages/clientes/clientes.component';
+import { ProdutosComponent } from './pages/produtos/produtos.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListTemplateComponent,
+    ClientesComponent,
+    ProdutosComponent
   ],
   imports: [
     UiModule,
