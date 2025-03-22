@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ListTemplateComponent } from '../../template/list-template/list-template.component';
 
 @Component({
   selector: 'app-produtos',
@@ -6,6 +7,19 @@ import { Component } from '@angular/core';
   templateUrl: './produtos.component.html',
   styleUrl: './produtos.component.css'
 })
-export class ProdutosComponent {
-  pageTitle: string = 'Produtos';
+export class ProdutosComponent implements OnInit, AfterViewInit {
+  constructor(private listTemplate: ListTemplateComponent, private cdRef: ChangeDetectorRef) { }
+  ngAfterViewInit() {
+     this.listTemplate.changeTitle('Produtos');
+    this.listTemplate.changePlaceholderSearch('Pesquisar produto');
+
+    this.cdRef.detectChanges();
+  }
+
+  ngOnInit() {
+  }
+
+
+
+
 }

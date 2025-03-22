@@ -1,0 +1,30 @@
+.menu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;;
+    position: fixed;
+    top: 0;
+    background: #f7f7f7;
+    left: 0;
+}
+
+.menu-line {
+    border-bottom: solid 1px #48484830;
+
+}
+
+.menu-height {
+    height: 132px;
+}
+
+.list-height {
+    height: 72px;
+}
+
+.wrapper-height {
+    height: 60px;
+}
+
+.content {
+    margin-top: calc(132px + 20px);
+}
