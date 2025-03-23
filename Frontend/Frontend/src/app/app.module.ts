@@ -18,6 +18,7 @@ import { ProductEditModalComponent } from './pages/produtos/modals/product-edit-
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductRemoveModalComponent } from './pages/produtos/modals/product-remove-modal/product-remove-modal.component';
 import { ProductCreateModalComponent } from './pages/produtos/modals/product-create-modal/product-create-modal.component';
+import { ClienteCreateModalComponent } from './pages/clientes/modals/cliente-create-modal/cliente-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProductCreateModalComponent } from './pages/produtos/modals/product-cre
     ProdutosComponent,
     ProductEditModalComponent,
     ProductRemoveModalComponent,
-    ProductCreateModalComponent
+    ProductCreateModalComponent,
+    ClienteCreateModalComponent
   ],
   imports: [
     SharedModule,

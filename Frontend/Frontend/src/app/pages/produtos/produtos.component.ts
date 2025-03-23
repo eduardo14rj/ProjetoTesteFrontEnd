@@ -67,11 +67,8 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.searchSub)
-      this.searchSub.unsubscribe();
-
-    this.searchSub.unsubscribe();
-    this.createSub.unsubscribe();
+    if (this.searchSub) this.searchSub.unsubscribe();
+    if (this.createSub) this.createSub.unsubscribe();
   }
 
   loadData(pageSize: number, pageIndex: number) {

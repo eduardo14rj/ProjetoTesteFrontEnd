@@ -12,6 +12,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxLoadingButtonsModule } from 'ngx-loading-buttons'
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
   declarations: [],
   imports: [
@@ -27,6 +28,7 @@ import { NgxLoadingButtonsModule } from 'ngx-loading-buttons'
     MatPaginatorModule,
     MatFormFieldModule,
     MatButtonToggleModule,
+    MatSlideToggleModule,
     NgxLoadingButtonsModule,
     CommonModule
   ],
@@ -38,6 +40,7 @@ import { NgxLoadingButtonsModule } from 'ngx-loading-buttons'
     MatIconModule,
     MatTableModule,
     MatIconButton,
+    MatSlideToggleModule,
     MatFormFieldModule,
     MatMenuModule,
     MatFormField,

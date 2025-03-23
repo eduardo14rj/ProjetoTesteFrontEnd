@@ -13,7 +13,7 @@ namespace Backend.Infra.Repositories
 
         protected override IQueryable<Cliente> ApplySearchFilter(IQueryable<Cliente> query, string search)
         {
-            return query.Where(c => c.Nome.Contains(search) || c.Email.Contains(search));
+            return query.Where(c => c.Nome.ToUpper().Contains(search.ToUpper()) || c.Email.ToUpper().Contains(search.ToUpper()));
         }
     }
 }

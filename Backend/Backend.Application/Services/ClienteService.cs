@@ -23,9 +23,10 @@ namespace Backend.Application.Services
         {
             var newItem = new Cliente
             {
-                Nome = data.Nome,
+                Nome = data.Name,
                 Email = data.Email,
-                Telefone = data.Telefone
+                Telefone = data.Phone,
+                Ativo = data.Active
             };
             await _clienteRepository.CreateAsync(newItem);
         }
