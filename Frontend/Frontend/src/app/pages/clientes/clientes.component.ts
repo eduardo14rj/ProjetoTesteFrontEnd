@@ -10,6 +10,8 @@ import { ListProduto } from '../../core/models/list-produto.model';
 import { ListCliente } from '../../core/models/list-cliente.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ClienteCreateModalComponent } from './modals/cliente-create-modal/cliente-create-modal.component';
+import { ClienteEditModalComponent } from './modals/cliente-edit-modal/cliente-edit-modal.component';
+import { ClienteDeleteModalComponent } from './modals/cliente-delete-modal/cliente-delete-modal.component';
 
 @Component({
   selector: 'app-clientes',
@@ -19,7 +21,7 @@ import { ClienteCreateModalComponent } from './modals/cliente-create-modal/clien
 })
 export class ClientesComponent implements OnInit, AfterViewInit, OnDestroy {
   public items = new MatTableDataSource<Cliente>([]);
-  public displayedColumns: string[] = ['nome', 'email', 'telefone', 'ativo'];
+  public displayedColumns: string[] = ['nome', 'email', 'telefone', 'ativo', 'acoes'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -78,6 +80,31 @@ export class ClientesComponent implements OnInit, AfterViewInit, OnDestroy {
       });
   }
 
+  edit(item: Cliente) {
+    var e = this.dialog.open(ClienteEditModalComponent, {
+      width: '400px',
+      data: item,
+      height: 'auto',
+    });
+    e.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.loadData(this.paginator.pageSize, this.paginator.pageIndex + 1);
+      }
+    });
+  }
+
+  delete(item: Cliente) {
+    var e = this.dialog.open(ClienteDeleteModalComponent, {
+      width: '400px',
+      data: item,
+      height: 'auto',
+    });
+    e.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.loadData(this.paginator.pageSize, this.paginator.pageIndex + 1);
+      }
+    });
+  }
 
   ngAfterViewInit() {
     this.listTemplate.changeTitle('Produtos');

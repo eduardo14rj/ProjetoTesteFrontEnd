@@ -36,6 +36,10 @@ namespace Backend.Application.Services
             var item = await _clienteRepository.GetByIdAsync(data.Id);
             if (item is not null)
             {
+                item.Ativo = data.Active;
+                item.Nome = data.Name;
+                item.Email = data.Email;
+                item.Telefone = data.Phone;
                 await _clienteRepository.UpdateAsync(item);
             }
         }

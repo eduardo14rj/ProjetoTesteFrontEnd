@@ -2,7 +2,7 @@
 
 <mat-dialog-content>
 
-    <form [formGroup]="form" (ngSubmit)="create()" style="padding-top: 20px;">
+    <form [formGroup]="form" (ngSubmit)="edit()" style="padding-top: 20px;">
         <mat-form-field appearance="outline" class="w-full">
             <mat-label>Nome</mat-label>
             <input matInput formControlName="name" type="text" required>
