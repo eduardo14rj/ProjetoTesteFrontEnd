@@ -8,8 +8,6 @@ Este repositório contém dois projetos: um para o Backend e outro para o Fronte
 ProjetoTesteFrontend/
 │
 ├── Backend/
-│   ├── Backend/
-|   |   ├── Backend.sln
 │   │   ├── Backend.csproj
 │   │   ├── Controllers/
 │   │   ├── Program.cs
@@ -33,21 +31,49 @@ ProjetoTesteFrontend/
     ├── angular.json
     ├── package.json
     ├── src/
-    └── e2e/
+    │   ├── app/
+    │   │   ├── core/
+    │   │   │   ├── classes/
+    │   │   │   ├── interceptors/
+    │   │   │   ├── models/
+    │   │   │   ├── ui/
+    │   │   ├── pages/
+    │   │   ├── services/
+    │   │   ├── shared/
+    │   │   ├── template/
+    │   ├── utils/
 ```
 
-## Execução do projeto
+## Backend
 
-### Backend
+O projeto Backend é uma aplicação ASP.NET Core que utiliza Entity Framework Core para persistência de dados.
 
-1. Certifique-se de ter o [.NET SDK](https://dotnet.microsoft.com/download) instalado.
-2. Navegue até a pasta `Backend`.
-3. Abra o arquivo `Backend.sln` no Visual Studio.
-4. Compile e execute o projeto a partir do Visual Studio.
+### Estrutura do Backend
 
-### Frontend
+- **Backend.sln**: Arquivo de solução do Visual Studio.
+- **Backend/Backend**: Projeto principal da aplicação.
+- **Backend/Backend.Application**: Contém os serviços e DTOs.
+- **Backend/Backend.Domain**: Contém as entidades e interfaces de repositório.
+- **Backend/Backend.Infra**: Contém a implementação dos repositórios e o contexto do banco de dados.
 
-1. Certifique-se de ter o [Node.js](https://nodejs.org/) instalado no `Frontend/Frontend`.
-2. Navegue até a pasta `Frontend/Frontend`.
-3. Execute `npm install` para instalar as dependências.
-4. Execute `ng serve` para iniciar a aplicação.
+### Como executar o Backend
+
+1. Navegue até a pasta `Backend`.
+2. Abra a solução `Backend.sln` no Visual Studio.
+3. Compile e execute o projeto.
+
+## Frontend
+
+O projeto Frontend é uma aplicação Angular que consome a API do Backend.
+
+### Estrutura do Frontend
+
+- **angular.json**: Arquivo de configuração do Angular CLI.
+- **package.json**: Arquivo de configuração do npm.
+- **src**: Contém os arquivos fonte do projeto Angular.
+
+### Como executar o Frontend
+
+1. Navegue até a pasta `Frontend`.
+2. Execute `npm install` para instalar as dependências.
+3. Execute `ng serve` para iniciar a aplicação.
