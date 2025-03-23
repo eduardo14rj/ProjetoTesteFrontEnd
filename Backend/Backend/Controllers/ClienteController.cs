@@ -24,9 +24,9 @@ namespace Backend.Controllers
         }
 
         [HttpGet("Read")]
-        public async Task<IActionResult> List([FromQuery] int pageOffset)
+        public async Task<IActionResult> List([FromQuery] int pageOffset, [FromQuery] int pageSize, [FromQuery] string? search)
         {
-            var produtos = await ClienteService.ListAsync(pageOffset);
+            var produtos = await ClienteService.ListAsync(pageOffset, pageSize, search ?? string.Empty);
             return Ok(produtos);
         }
 

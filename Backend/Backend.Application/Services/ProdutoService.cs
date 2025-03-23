@@ -13,9 +13,9 @@ namespace Backend.Application.Services
             _produtoRepository = produtoRepository;
         }
 
-        public async Task<PageResult<Produto>> ListAsync(int pageOffset)
+        public async Task<PageResult<Produto>> ListAsync(int pageOffset, int pageSize, string search)
         {
-            var list = await _produtoRepository.ListPagedAsync(pageOffset, 5);
+            var list = await _produtoRepository.ListPagedAsync(pageOffset, pageSize, search);
             return list;
         }
 

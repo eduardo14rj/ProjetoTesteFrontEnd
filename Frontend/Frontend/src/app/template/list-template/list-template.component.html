@@ -1,27 +1,42 @@
 <main class="relative">
-    <nav ngClass="w-full fixed top-0 left-0">
-        <div class="border-b-1 p-4 bg-gray-100">
-            <div class="container max-w-6xl mx-auto">
-                <h2 class="font-bold">{{ pageTitle }}</h2>
+    <nav class="menu menu-height menu-line">
+        <div class="menu-line menu-height">
+            <div class="container align-center justify-between ">
+                <div class="flex align-center wrapper-height justify-end gap">
+
+                    <mat-button-toggle-group hideSingleSelectionIndicator #group="matButtonToggleGroup"
+                        [(value)]="selectOption">
+                        <mat-button-toggle value="Clientes" [routerLink]="['/clientes']">
+                            <mat-icon>person</mat-icon>
+                        </mat-button-toggle>
+                        <mat-button-toggle value="Produtos" [routerLink]="['/produtos']">
+                            <mat-icon>inbox</mat-icon>
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
             </div>
         </div>
-        <div class="border-b-1 p-4 bg-gray-100">
-            <div class="container max-w-6xl mx-auto">
-                <div class="grid grid-cols-2 ">
-                    <div class="relative">
-                        <input class="bg-white" placeholder="Pesquise por um item..." ubInput type="text" />
-                        <ng-icon name="lucideSearch"
-                            class="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500"></ng-icon>
-                    </div>
-                    <div class="flex justify-end">
-                        <app-button text="Cadastrar novo cliente" />
-                    </div>
+        <div class="container align-center justify-between menu-height">
+            <div class="flex justify-between align-center list-height">
+                <h3>{{pageTitle}}</h3>
+                <div class="flex align-center gap">
+                    <button mat-flat-button color="blue" (click)="create()">
+                        <mat-icon>add</mat-icon>
+                        <span>{{createText}}</span>
+                    </button>
+                    <mat-form-field appearance="outline" class="hint-hide clearable-hide">
+                        <input matInput type="search" [value]="searchValue" (change)="changeSearchValue($event)"
+                            [placeholder]="searchPlaceholder">
+                        <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'" (click)="search()">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </mat-form-field>
                 </div>
             </div>
         </div>
     </nav>
-    
-    <body class="mt-[160px]">
+
+    <body class="content">
         <router-outlet></router-outlet>
     </body>
 </main>

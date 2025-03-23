@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Criar novo produto</h2>
+
+<mat-dialog-content>
+
+    <form [formGroup]="form" (ngSubmit)="create()" style="padding-top: 20px;">
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" type="text" required>
+            <mat-error *ngIf="form.get('name')?.hasError('required')">Campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Preço</mat-label>
+            <input matInput formControlName="price" type="number" required>
+            <mat-error *ngIf="form.get('price')?.hasError('required')">Campo obrigatório</mat-error>
+        </mat-form-field>
+
+        <div class="flex justify-end gap">
+            <button mat-button type="button" (click)="close()">Cancelar</button>
+            <button mat-flat-button [mtBasicSpinner]="load" type="submit" [disabled]="form.invalid || load">Criar</button>
+        </div>
+    </form>
+
+</mat-dialog-content>

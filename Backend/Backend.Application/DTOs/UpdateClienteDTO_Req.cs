@@ -10,6 +10,8 @@ namespace Backend.Application.DTOs
     {
         public int Id { get; set; }
         public string Email { get; set; } = default!;
-        public string Nome { get; set; } = default!;
+        public string Name { get; set; } = default!;
+        public string Phone { get; set; } = default!;
+        public bool Active { get; set; }
     }
 }

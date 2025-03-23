@@ -15,6 +15,6 @@ namespace Backend.Domain.Interfaces.Generics
         Task DeleteAsync(T entity);
 
         Task<T?> GetByIdAsync(int id);
-        Task<PageResult<T>> ListPagedAsync(int pageOffset, int pageSize);
+        Task<PageResult<T>> ListPagedAsync(int pageOffset, int pageSize, string search);
     }
 }

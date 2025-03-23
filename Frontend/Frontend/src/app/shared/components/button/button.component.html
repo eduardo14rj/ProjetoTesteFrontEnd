@@ -1,8 +1,0 @@
-<button ubButton [disabled]="(load || disabled)">
-    <div *ngIf="!load">
-        {{ text }}
-    </div>
-    <div *ngIf="load" class="flex justify-center items-center">
-        <ng-icon name="lucideLoader" class="animate-spin h-8 w-8"></ng-icon>
-    </div>
-</button>

@@ -13,9 +13,9 @@ namespace Backend.Application.Services
             _clienteRepository = clienteRepository;
         }
 
-        public async Task<PageResult<Cliente>> ListAsync(int pageOffset)
+        public async Task<PageResult<Cliente>> ListAsync(int pageOffset, int pageSize, string search)
         {
-            var list = await _clienteRepository.ListPagedAsync(pageOffset, 5);
+            var list = await _clienteRepository.ListPagedAsync(pageOffset, pageSize, search);
             return list;
         }
 
@@ -23,9 +23,10 @@ namespace Backend.Application.Services
         {
             var newItem = new Cliente
             {
-                Nome = data.Nome,
+                Nome = data.Name,
                 Email = data.Email,
-                Telefone = data.Telefone
+                Telefone = data.Phone,
+                Ativo = data.Active
             };
             await _clienteRepository.CreateAsync(newItem);
         }
@@ -35,6 +36,10 @@ namespace Backend.Application.Services
             var item = await _clienteRepository.GetByIdAsync(data.Id);
             if (item is not null)
             {
+                item.Ativo = data.Active;
+                item.Nome = data.Name;
+                item.Email = data.Email;
+                item.Telefone = data.Phone;
                 await _clienteRepository.UpdateAsync(item);
             }
         }
