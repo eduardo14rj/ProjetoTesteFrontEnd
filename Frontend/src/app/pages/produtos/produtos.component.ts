@@ -30,7 +30,7 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private listTemplate: ListTemplateComponent,
     private cdRef: ChangeDetectorRef,
-    private htttpClient: HttpClient,
+    private httpClient: HttpClient, // Corrected spelling here
     private dialog: MatDialog) { }
 
   ngAfterViewInit() {
@@ -72,7 +72,7 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadData(pageSize: number, pageIndex: number) {
-    this.htttpClient.get<ListProduto>(`produto/Read?pageSize=${pageSize}&pageOffset=${pageIndex}&search=${this.searchText}`)
+    this.httpClient.get<ListProduto>(`produto/Read?pageSize=${pageSize}&pageOffset=${pageIndex}&search=${this.searchText}`)
       .subscribe({
         next: (data) => {
           this.items.data = data.results.map(item => Object.assign(new Produto(), item));

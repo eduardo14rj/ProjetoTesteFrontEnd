@@ -13,28 +13,29 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./product-edit-modal.component.css']
 })
 export class ProductEditModalComponent implements OnInit {
-  public form: FormGroup;
+  public form: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    price: new FormControl('', [Validators.required])
+  });
+  
   public load: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: Produto,
     private dialogRef: MatDialogRef<ProductEditModalComponent>,
-    private fb: FormBuilder,
     private http: HttpClient,
     private snackbar: MatSnackBar
   ) {
-    this.form = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      price: ['', [Validators.required, Validators.min(0)]],
-      id: [-1, [Validators.required]]
-    });
+    this.form.setValue({
+      name: this.data.nome,
+      price: this.data.preco
+    })
   }
 
   ngOnInit(): void {
     this.form.setValue({
       name: this.data.nome,
-      price: this.data.preco,
-      id: this.data.id
+      price: this.data.preco
     });
   }
 
@@ -46,7 +47,9 @@ export class ProductEditModalComponent implements OnInit {
     this.load = true;
     if (this.form.valid) {
 
-      this.http.put('produto/Update', this.form.value)
+      var data = { ...this.form.value, id: this.data.id };
+
+      this.http.put('produto/Update', data)
         .subscribe({
           next: () => {
             this.snackbar.open('Produto atualizado com sucesso!', 'Fechar', {

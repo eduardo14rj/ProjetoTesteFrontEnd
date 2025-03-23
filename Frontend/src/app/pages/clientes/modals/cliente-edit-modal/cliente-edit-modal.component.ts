@@ -14,7 +14,6 @@ import { Cliente } from '../../../../core/models/cliente';
 })
 export class ClienteEditModalComponent {
   public form: FormGroup = new FormGroup({
-    id: new FormControl('', [Validators.required]),
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, Validators.pattern(/^\d{2}\d{4,5}\d{4}$/)]),
@@ -29,7 +28,6 @@ export class ClienteEditModalComponent {
     private snackbar: MatSnackBar
   ) {
     this.form.setValue({
-      id: this.data.id,
       name: this.data.nome,
       email: this.data.email,
       phone: this.data.telefone,
@@ -39,7 +37,7 @@ export class ClienteEditModalComponent {
 
   edit() {
     this.load = true;
-    this.http.put(`cliente/update`, this.form.value).subscribe({
+    this.http.put(`cliente/update`, { ...this.form.value, id: this.data.id }).subscribe({
       next: () => {
         this.snackbar.open('Cliente editado com sucesso!', 'Fechar', {
           duration: 5000
