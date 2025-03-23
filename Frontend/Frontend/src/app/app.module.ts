@@ -14,19 +14,23 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { API_BASE_URL } from './core/interceptors/http/config/api-base-url.token';
 import { baseUrlInterceptor } from './core/interceptors/http/config/baseUrl.interceptor';
+import { ProductEditModalComponent } from './pages/produtos/modals/product-edit-modal/product-edit-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListTemplateComponent,
     ClientesComponent,
-    ProdutosComponent
+    ProdutosComponent,
+    ProductEditModalComponent
   ],
   imports: [
     SharedModule,
     UiModule,
     HttpClientModule,
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   exports: [],

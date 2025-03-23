@@ -6,6 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Produto } from '../../core/models/produto.model';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductEditModalComponent } from './modals/product-edit-modal/product-edit-modal.component';
 
 @Component({
   selector: 'app-produtos',
@@ -19,14 +21,13 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
   public columns = ['nome', 'preco', 'criadoEm', 'acoes'];
   private searchText: string = "";
   private searchSub!: Subscription;
-
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private listTemplate: ListTemplateComponent,
     private cdRef: ChangeDetectorRef,
-    private htttpClient: HttpClient) { }
+    private htttpClient: HttpClient,
+    private dialog: MatDialog) { }
 
   ngAfterViewInit() {
     this.listTemplate.changeTitle('Produtos');
@@ -44,6 +45,7 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
     this.listTemplate.SearchEmitter.subscribe((searchValue: string) => {
       this.searchText = searchValue;
       this.loadData(this.paginator.pageSize, this.paginator.pageIndex);
+      this.paginator.firstPage();
     });
   }
 
@@ -56,7 +58,7 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
     this.htttpClient.get<ListProduto>(`produto/Read?pageSize=${pageSize}&pageOffset=${pageIndex}&search=${this.searchText}`)
       .subscribe({
         next: (data) => {
-          this.items.data = data.results;
+          this.items.data = data.results.map(item => Object.assign(new Produto(), item));
           this.paginator.pageSize = pageSize;
           this.paginator.length = data.totalRecords;
         },
@@ -64,6 +66,20 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
           console.error(error);
         }
       });
+  }
+
+  edit(item: Produto) {
+    var e = this.dialog.open(ProductEditModalComponent, {
+      width: '400px',
+      data: item,
+      height: 'auto',
+    });
+    e.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.loadData(this.paginator.pageSize, this.paginator.pageIndex + 1);
+      }
+    });
+
   }
 
 }

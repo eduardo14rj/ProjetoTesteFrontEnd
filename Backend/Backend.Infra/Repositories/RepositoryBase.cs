@@ -44,10 +44,6 @@ namespace Backend.Infra.Repositories
 
         public async Task<PageResult<T>> ListPagedAsync(int pageOffset, int pageSize, string search)
         {
-            var total = _context.Set<T>().Where(x => x.DeletadoEm == null).Count();
-
-            var offset = pageOffset == 0 ? 1 : pageOffset;
-
             var query = _context.Set<T>().Where(x => x.DeletadoEm == null);
 
             if (!string.IsNullOrEmpty(search))
@@ -55,16 +51,22 @@ namespace Backend.Infra.Repositories
                 query = ApplySearchFilter(query, search);
             }
 
+            var items = await query.ToListAsync();
+
+            var total = items.Count();
+
+            var offset = pageOffset == 0 ? 1 : pageOffset;
+
+
             var result = new PageResult<T>
             {
                 CurrentPage = offset,
                 PageSize = pageSize,
                 TotalRecords = total,
                 IsNextPage = (offset * pageSize) < total,
-                Results = await query
+                Results = items
                     .Skip((offset - 1) * pageSize)
                     .Take(pageSize)
-                    .ToListAsync()
             };
 
             return result;
@@ -76,9 +78,10 @@ namespace Backend.Infra.Repositories
             return items;
         }
 
-        public Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Update(entity);
+            await _context.SaveChangesAsync();
         }
 
         protected abstract IQueryable<T> ApplySearchFilter(IQueryable<T> query, string search);
