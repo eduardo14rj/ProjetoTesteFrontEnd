@@ -8,6 +8,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductEditModalComponent } from './modals/product-edit-modal/product-edit-modal.component';
+import { ProductRemoveModalComponent } from './modals/product-remove-modal/product-remove-modal.component';
 
 @Component({
   selector: 'app-produtos',
@@ -80,6 +81,19 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     });
 
+  }
+
+  delete(item: Produto) {
+    var e = this.dialog.open(ProductRemoveModalComponent, {
+      width: '400px',
+      data: item,
+      height: 'auto',
+    });
+    e.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.loadData(this.paginator.pageSize, this.paginator.pageIndex + 1);
+      }
+    });
   }
 
 }
