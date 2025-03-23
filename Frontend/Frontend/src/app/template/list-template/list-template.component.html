@@ -19,9 +19,13 @@
         <div class="container align-center justify-between menu-height">
             <div class="flex justify-between align-center list-height">
                 <h3>{{pageTitle}}</h3>
-                <div>
-                    <mat-form-field appearance="outline"  class="hint-hide clearable-hide">
-                        <input matInput type="search"  [value]="searchValue" (change)="changeSearchValue($event)"
+                <div class="flex align-center gap">
+                    <button mat-flat-button color="blue" (click)="create()">
+                        <mat-icon>add</mat-icon>
+                        <span>{{createText}}</span>
+                    </button>
+                    <mat-form-field appearance="outline" class="hint-hide clearable-hide">
+                        <input matInput type="search" [value]="searchValue" (change)="changeSearchValue($event)"
                             [placeholder]="searchPlaceholder">
                         <button mat-icon-button matSuffix [attr.aria-label]="'Hide password'" (click)="search()">
                             <mat-icon>search</mat-icon>

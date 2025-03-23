@@ -17,6 +17,7 @@ import { baseUrlInterceptor } from './core/interceptors/http/config/baseUrl.inte
 import { ProductEditModalComponent } from './pages/produtos/modals/product-edit-modal/product-edit-modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductRemoveModalComponent } from './pages/produtos/modals/product-remove-modal/product-remove-modal.component';
+import { ProductCreateModalComponent } from './pages/produtos/modals/product-create-modal/product-create-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProductRemoveModalComponent } from './pages/produtos/modals/product-rem
     ClientesComponent,
     ProdutosComponent,
     ProductEditModalComponent,
-    ProductRemoveModalComponent
+    ProductRemoveModalComponent,
+    ProductCreateModalComponent
   ],
   imports: [
     SharedModule,

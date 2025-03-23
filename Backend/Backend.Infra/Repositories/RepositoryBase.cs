@@ -65,6 +65,7 @@ namespace Backend.Infra.Repositories
                 TotalRecords = total,
                 IsNextPage = (offset * pageSize) < total,
                 Results = items
+                    .OrderByDescending(x => x.CriadoEm)
                     .Skip((offset - 1) * pageSize)
                     .Take(pageSize)
             };

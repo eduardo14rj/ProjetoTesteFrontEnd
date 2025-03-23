@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, input, Input, OnInit, output, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,11 +12,13 @@ export class ListTemplateComponent implements OnInit {
   @Input() pageTitle: string = 'Título';
   @Input() searchPlaceholder: string = "";
   @Input() searchValue: string = "";
+  @Input() createText: string = "Criar novo item";
   @Output() SearchEmitter: EventEmitter<string> = new EventEmitter<string>();
+  @Output() CreateEmitter: EventEmitter<void> = new EventEmitter<void>();
   public selectOption: string = "Clientes";
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private cd: ChangeDetectorRef) { }
+  constructor(private route: ActivatedRoute, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     const childRoute = this.route.firstChild;
@@ -25,7 +27,7 @@ export class ListTemplateComponent implements OnInit {
       this.selectOption = childRoute.snapshot.data['pageTitle'];
     }
 
-    
+
   }
 
   changeTitle(newTitle: string) {
@@ -44,8 +46,17 @@ export class ListTemplateComponent implements OnInit {
     this.searchValue = value;
   }
 
+  changeCreateText(label: string) {
+    this.createText = label;
+    this.cd.detectChanges();
+  }
+
   search() {
     this.SearchEmitter.emit(this.searchValue);
+  }
+
+  create() {
+    this.CreateEmitter.emit();
   }
 
 }

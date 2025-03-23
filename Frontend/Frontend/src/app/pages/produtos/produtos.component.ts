@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductEditModalComponent } from './modals/product-edit-modal/product-edit-modal.component';
 import { ProductRemoveModalComponent } from './modals/product-remove-modal/product-remove-modal.component';
+import { ProductCreateModalComponent } from './modals/product-create-modal/product-create-modal.component';
 
 @Component({
   selector: 'app-produtos',
@@ -22,6 +23,8 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
   public columns = ['nome', 'preco', 'criadoEm', 'acoes'];
   private searchText: string = "";
   private searchSub!: Subscription;
+  private createSub!: Subscription;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -33,7 +36,7 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.listTemplate.changeTitle('Produtos');
     this.listTemplate.changePlaceholderSearch('Pesquisar produto');
-
+    this.listTemplate.changeCreateText('Criar novo produto');
     this.paginator.page.subscribe((event: PageEvent) => {
       this.loadData(event.pageSize, event.pageIndex + 1);
     });
@@ -43,16 +46,32 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.loadData(10, 1);
-    this.listTemplate.SearchEmitter.subscribe((searchValue: string) => {
+    this.searchSub = this.listTemplate.SearchEmitter.subscribe((searchValue: string) => {
       this.searchText = searchValue;
       this.loadData(this.paginator.pageSize, this.paginator.pageIndex);
       this.paginator.firstPage();
+    });
+
+    this.createSub = this.listTemplate.CreateEmitter.subscribe(() => {
+      var e = this.dialog.open(ProductCreateModalComponent, {
+        width: '400px',
+        data: new Produto(),
+        height: 'auto',
+      });
+      e.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+          this.loadData(this.paginator.pageSize, this.paginator.pageIndex + 1);
+        }
+      });
     });
   }
 
   ngOnDestroy(): void {
     if (this.searchSub)
       this.searchSub.unsubscribe();
+
+    this.searchSub.unsubscribe();
+    this.createSub.unsubscribe();
   }
 
   loadData(pageSize: number, pageIndex: number) {
