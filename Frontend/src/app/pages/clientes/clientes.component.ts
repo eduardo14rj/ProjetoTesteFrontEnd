@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ClienteCreateModalComponent } from './modals/cliente-create-modal/cliente-create-modal.component';
 import { ClienteEditModalComponent } from './modals/cliente-edit-modal/cliente-edit-modal.component';
 import { ClienteDeleteModalComponent } from './modals/cliente-delete-modal/cliente-delete-modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-clientes',
@@ -33,7 +34,8 @@ export class ClientesComponent implements OnInit, AfterViewInit, OnDestroy {
     private listTemplate: ListTemplateComponent,
     private htttpClient: HttpClient,
     private cdRef: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar,
   ) { }
 
   ngOnDestroy(): void {
@@ -43,9 +45,6 @@ export class ClientesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.loadData(10, 1);
-    this.listTemplate.changeTitle('Clientes');
-    this.listTemplate.changePlaceholderSearch('Pesquisar cliente');
-    this.listTemplate.changeCreateText('Criar novo cliente');
 
     this.createSub = this.listTemplate.CreateEmitter.subscribe(() => {
       var e = this.dialog.open(ClienteCreateModalComponent, {
@@ -75,7 +74,9 @@ export class ClientesComponent implements OnInit, AfterViewInit, OnDestroy {
           this.paginator.length = data.totalRecords;
         },
         error: (error) => {
-          console.error(error);
+          this.snackbar.open('Erro ao listar clientes:' + error, 'Fechar', {
+            duration: 2000,
+          });
         }
       });
   }
@@ -107,13 +108,12 @@ export class ClientesComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.listTemplate.changeTitle('Produtos');
-    this.listTemplate.changePlaceholderSearch('Pesquisar produto');
-    this.listTemplate.changeCreateText('Criar novo produto');
+    this.listTemplate.changeTitle('Clientes');
+    this.listTemplate.changePlaceholderSearch('Pesquisar cliente');
+    this.listTemplate.changeCreateText('Criar novo cliente');
     this.paginator.page.subscribe((event: PageEvent) => {
       this.loadData(event.pageSize, event.pageIndex + 1);
     });
-
     this.cdRef.detectChanges();
   }
 }
