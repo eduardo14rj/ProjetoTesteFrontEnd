@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductEditModalComponent } from './modals/product-edit-modal/product-edit-modal.component';
 import { ProductRemoveModalComponent } from './modals/product-remove-modal/product-remove-modal.component';
 import { ProductCreateModalComponent } from './modals/product-create-modal/product-create-modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-produtos',
@@ -30,8 +31,9 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private listTemplate: ListTemplateComponent,
     private cdRef: ChangeDetectorRef,
-    private httpClient: HttpClient, // Corrected spelling here
-    private dialog: MatDialog) { }
+    private httpClient: HttpClient,
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar) { }
 
   ngAfterViewInit() {
     this.listTemplate.changeTitle('Produtos');
@@ -80,7 +82,9 @@ export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
           this.paginator.length = data.totalRecords;
         },
         error: (error) => {
-          console.error(error);
+          this.snackbar.open('Erro ao listar produtos:' + error, 'Fechar', {
+            duration: 2000,
+          });
         }
       });
   }
