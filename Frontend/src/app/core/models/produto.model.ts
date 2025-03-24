@@ -2,10 +2,11 @@ import { dateToString } from "../../../utils/dateToString";
 
 
 export class Produto {
-    public id: number = -1;
-    public preco: number = -1;
+    public id!: number;
+    public preco!: number;
     public criadoEm: Date = new Date();
-    public nome: string = "";
+    public nome!: string
+    public estoque!: number;
     public deletadoEm: Date | null = null;
     constructor() { }
 

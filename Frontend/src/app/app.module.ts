@@ -21,6 +21,7 @@ import { ProductCreateModalComponent } from './pages/produtos/modals/product-cre
 import { ClienteCreateModalComponent } from './pages/clientes/modals/cliente-create-modal/cliente-create-modal.component';
 import { ClienteEditModalComponent } from './pages/clientes/modals/cliente-edit-modal/cliente-edit-modal.component';
 import { ClienteDeleteModalComponent } from './pages/clientes/modals/cliente-delete-modal/cliente-delete-modal.component';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { ClienteDeleteModalComponent } from './pages/clientes/modals/cliente-del
   exports: [],
   providers: [
     { provide: MatPaginatorIntl, useClass: PaginatorIntl },
-    { provide: API_BASE_URL, useValue: 'https://localhost:7250/api/' },
+    { provide: API_BASE_URL, useValue: environment.apiUrl },
     { provide: HTTP_INTERCEPTORS, useClass: baseUrlInterceptor, multi: true }  // Registro do interceptor
   ],
   bootstrap: [AppComponent]

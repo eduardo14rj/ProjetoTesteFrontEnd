@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input'; // Import MatInputModu
 import { MatBasicSpinnerDirective } from 'ngx-loading-buttons';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Cliente } from '../../../../core/models/cliente';
+import { of } from 'rxjs';
 
 describe('ClienteEditModalComponent', () => {
   let component: ClienteEditModalComponent;
@@ -21,7 +22,7 @@ describe('ClienteEditModalComponent', () => {
       imports: [
         MatDialogModule,
         MatFormFieldModule,
-        MatInputModule, 
+        MatInputModule,
         ReactiveFormsModule,
         MatCheckboxModule,
         MatSlideToggleModule,
@@ -34,7 +35,7 @@ describe('ClienteEditModalComponent', () => {
         { provide: HttpClient, useValue: {} }
       ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ClienteEditModalComponent);
     component = fixture.componentInstance;

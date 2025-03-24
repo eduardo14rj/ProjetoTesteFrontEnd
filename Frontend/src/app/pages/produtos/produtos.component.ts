@@ -20,7 +20,7 @@ import { ProductCreateModalComponent } from './modals/product-create-modal/produ
 export class ProdutosComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public items = new MatTableDataSource<Produto>([]);
-  public columns = ['nome', 'preco', 'criadoEm', 'acoes'];
+  public columns = ['nome', 'preco', 'estoque', 'criadoEm', 'acoes'];
   private searchText: string = "";
   private searchSub!: Subscription;
   private createSub!: Subscription;

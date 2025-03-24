@@ -24,7 +24,8 @@ namespace Backend.Application.Services
             var newItem = new Produto
             {
                 Nome = data.Name,
-                Preco = data.Price
+                Preco = data.Price,
+                Estoque = data.Stock
             };
             await _produtoRepository.CreateAsync(newItem);
         }
@@ -36,6 +37,7 @@ namespace Backend.Application.Services
             {
                 item.Nome = data.Name;
                 item.Preco = data.Price;
+                item.Estoque = data.Stock;
                 await _produtoRepository.UpdateAsync(item);
             }
         }

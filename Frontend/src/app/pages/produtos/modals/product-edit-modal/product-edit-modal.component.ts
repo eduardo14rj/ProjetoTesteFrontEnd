@@ -14,10 +14,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProductEditModalComponent implements OnInit {
   public form: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required])
+    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+    price: new FormControl('', [Validators.required]),
+    stock: new FormControl(1, [Validators.required, Validators.min(0), Validators.max(999999999)]),
   });
-  
+
   public load: boolean = false;
 
   constructor(
@@ -28,14 +29,16 @@ export class ProductEditModalComponent implements OnInit {
   ) {
     this.form.setValue({
       name: this.data.nome,
-      price: this.data.preco
+      price: this.data.preco,
+      stock: this.data.estoque
     })
   }
 
   ngOnInit(): void {
     this.form.setValue({
       name: this.data.nome,
-      price: this.data.preco
+      price: this.data.preco,
+      stock: this.data.estoque
     });
   }
 
