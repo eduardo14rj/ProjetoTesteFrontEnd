@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Editar Cliente</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="edit()" style="padding-top: 20px;">
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" type="text" required>
+            <mat-error *ngIf="form.get('name')?.hasError('required')">Campo obrigatório.</mat-error>
+            <mat-error *ngIf="form.get('name')?.hasError('minlength')">O nome precisa ter no mínimo 3
+                dígitos.</mat-error>
+            <mat-error *ngIf="form.get('name')?.hasError('maxlength')">O nome não pode ultrapassar 100
+                dígitos.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="phone" type="tel" mask="(00) 00000-0000" required>
+        </mat-form-field>
+
+        <mat-slide-toggle formControlName="active">Ativo</mat-slide-toggle>
+        <mat-error *ngIf="form.get('active')?.hasError('required')">Campo obrigatório</mat-error>
+
+        <div class="flex justify-end gap">
+            <button mat-button type="button" (click)="close()">Cancelar</button>
+            <button mat-flat-button type="submit" [disabled]="form.invalid">Salvar</button>
+        </div>
+    </form>
+</mat-dialog-content>

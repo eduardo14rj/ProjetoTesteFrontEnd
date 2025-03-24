@@ -4,5 +4,6 @@
     {
         public string Nome { get; set; } = default!;
         public decimal Preco { get; set; }
+        public int Estoque { get; set; }
     }
 }

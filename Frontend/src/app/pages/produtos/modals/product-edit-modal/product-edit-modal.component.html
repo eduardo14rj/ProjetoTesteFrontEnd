@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Editar produto</h2>
+
+<mat-dialog-content style="padding-top: 20px;">
+    <form [formGroup]="form" novalidate class="h-full" (ngSubmit)="submit()">
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error *ngIf="form.controls['name'].hasError('required')">O nome é obrigatório.</mat-error>
+            <mat-error *ngIf="form.get('name')?.hasError('minlength')">O nome precisa ter no mínimo 3
+                dígitos.</mat-error>
+            <mat-error *ngIf="form.get('name')?.hasError('maxlength')">O nome não pode ultrapassar 100
+                dígitos.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Preço</mat-label>
+            <input matInput formControlName="price" type="number">
+            <mat-error *ngIf="form.controls['price'].hasError('required')">
+                O preço é obrigatório.
+            </mat-error>
+            <mat-error *ngIf="form.get('price')?.hasError('min')">O preço não pode ser menor ou igual a 0.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Estoque</mat-label>
+            <input matInput formControlName="stock" />
+            <mat-error *ngIf="form.controls['stock'].hasError('required')">O nome é obrigatório.</mat-error>
+            <mat-error *ngIf="form.get('stock')?.hasError('min')">O valor não pode ser menor que 0.</mat-error>
+            <mat-error *ngIf="form.get('stock')?.hasError('max')">O valor não pode ser maior que 999999999.</mat-error>
+        </mat-form-field>
+
+        <div class="flex justify-end gap">
+            <button mat-button type="button" (click)="close()">Cancelar</button>
+            <button mat-flat-button [mtBasicSpinner]="load" color="primary" [disabled]="form.invalid || load"
+                type="submit">Salvar</button>
+        </div>
+    </form>
+</mat-dialog-content>
