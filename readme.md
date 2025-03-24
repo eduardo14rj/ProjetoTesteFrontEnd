@@ -66,6 +66,13 @@ O projeto Backend é uma aplicação ASP.NET Core que utiliza Entity Framework C
 
 O projeto Frontend é uma aplicação Angular que consome a API do Backend.
 
+### Instalação
+
+1. Instale o Angular CLI globalmente:
+```bash
+npm install -g @angular/cli
+```
+
 ### Estrutura do Frontend
 
 - **angular.json**: Arquivo de configuração do Angular CLI.
