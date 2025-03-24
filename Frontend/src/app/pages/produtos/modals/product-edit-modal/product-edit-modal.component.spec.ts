@@ -29,7 +29,7 @@ describe('ProductEditModalComponent', () => {
         MatSnackBarModule
       ],
       providers: [
-        { provide: MAT_DIALOG_DATA, useValue: { id: 1, nome: "John", preco: 36.8 } as Produto },
+        { provide: MAT_DIALOG_DATA, useValue: { id: 1, nome: "John", preco: 36.8, estoque: 18 } as Produto },
         { provide: MatDialogRef, useValue: {} },
         { provide: HttpClient, useValue: {} }
       ]
@@ -42,7 +42,8 @@ describe('ProductEditModalComponent', () => {
     // Inicializa o formulário com um valor para todos os controles
     component.form.setValue({
       name: "John",
-      price: 36.8
+      price: 36.8,
+      stock: 18
     });
 
     fixture.detectChanges();

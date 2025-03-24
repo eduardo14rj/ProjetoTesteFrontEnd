@@ -13,6 +13,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgxLoadingButtonsModule } from 'ngx-loading-buttons'
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -25,6 +27,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatMenuModule,
     MatFormField,
     MatIconButton,
+    NgxMaskDirective,
     MatPaginatorModule,
     MatFormFieldModule,
     MatButtonToggleModule,
@@ -44,9 +47,11 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatFormFieldModule,
     MatMenuModule,
     MatFormField,
+    NgxMaskDirective,
     MatButtonToggleModule,
     NgxLoadingButtonsModule,
     MatPaginatorModule
-  ]
+  ],
+  providers: [provideNgxMask()]
 })
 export class UiModule { }

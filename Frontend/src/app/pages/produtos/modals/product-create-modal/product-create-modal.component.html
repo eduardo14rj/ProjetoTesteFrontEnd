@@ -15,6 +15,7 @@
             <mat-label>Preço</mat-label>
             <input matInput formControlName="price" type="number" required>
             <mat-error *ngIf="form.get('price')?.hasError('required')">Campo obrigatório</mat-error>
+            <mat-error *ngIf="form.get('price')?.hasError('min')">O preço não pode ser menor ou igual a 0.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="w-full">

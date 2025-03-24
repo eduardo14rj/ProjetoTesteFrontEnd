@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './cliente-create-modal.component.css'
 })
 export class ClienteCreateModalComponent {
+  ;
   public form: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -28,7 +29,7 @@ export class ClienteCreateModalComponent {
 
   create() {
     this.load = true;
-//    console.log({ "valor retornado": this.form.value });
+    //    console.log({ "valor retornado": this.form.value });
     this.http.post(`cliente/create`, this.form.value).subscribe({
       next: () => {
         this.snackbar.open('Cliente criado com sucesso!', 'Fechar', {

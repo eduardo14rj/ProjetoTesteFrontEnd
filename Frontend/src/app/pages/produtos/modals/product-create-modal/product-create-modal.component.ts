@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductCreateModalComponent {
   public form: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
-    price: new FormControl('', [Validators.required]),
+    price: new FormControl('', [Validators.required, Validators.min(1)]),
     stock: new FormControl(1, [Validators.required, Validators.min(0), Validators.max(999999999)]),
   });
   public load: boolean = false;

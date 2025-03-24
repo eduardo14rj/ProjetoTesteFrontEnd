@@ -6,8 +6,10 @@
             <mat-label>Nome</mat-label>
             <input matInput formControlName="name" />
             <mat-error *ngIf="form.controls['name'].hasError('required')">O nome é obrigatório.</mat-error>
-            <mat-error *ngIf="form.get('name')?.hasError('minlength')">O nome precisa ter no mínimo 3 dígitos.</mat-error>
-            <mat-error *ngIf="form.get('name')?.hasError('maxlength')">O nome não pode ultrapassar 100 dígitos.</mat-error>
+            <mat-error *ngIf="form.get('name')?.hasError('minlength')">O nome precisa ter no mínimo 3
+                dígitos.</mat-error>
+            <mat-error *ngIf="form.get('name')?.hasError('maxlength')">O nome não pode ultrapassar 100
+                dígitos.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="w-full">
@@ -16,9 +18,7 @@
             <mat-error *ngIf="form.controls['price'].hasError('required')">
                 O preço é obrigatório.
             </mat-error>
-            <mat-error *ngIf="form.controls['price'].hasError('min')">
-                O preço deve ser um valor positivo.
-            </mat-error>
+            <mat-error *ngIf="form.get('price')?.hasError('min')">O preço não pode ser menor ou igual a 0.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="w-full">
